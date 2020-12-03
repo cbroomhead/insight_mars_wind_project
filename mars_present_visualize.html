@@ -13132,7 +13132,10 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">sal</span>
 <span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
 <span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">clear_output</span>
+
+<span class="o">!</span>nbinteract mars_present_visualize.ipynb
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">clear_output</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;a href=&quot;/files/mars_present_visualize.html?download=1&quot; target=&quot;_blank&quot;&gt;Done! Click here to download the HTML file.&lt;/a&gt;&#39;</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -13329,7 +13332,7 @@ div#notebook {
     }
 
     var interact = new window.NbInteract({
-      spec: 'cbroomhead/insight_mars_wind_project/main',
+      spec: 'cbroomhead/insight_mars_wind_project/master',
       baseUrl: 'https://mybinder.org',
       provider: 'gh',
     })
