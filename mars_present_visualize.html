@@ -13155,45 +13155,14 @@ div#notebook {
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># establish connection to the database</span>
-<span class="n">engine</span> <span class="o">=</span> <span class="n">sal</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///marswind.db&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-  </div>
-
-  
-
-  <div class="
-      cell border-box-sizing code_cell rendered">
-    <div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># storing tables from database into dataframe</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM master&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-  </div>
-
-  
-
-  <div class="
-      cell border-box-sizing code_cell rendered">
-    <div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get list of unique sols in the database</span>
-<span class="c1"># this will serve a selection list to display wind roses</span>
-<span class="n">unique_sols</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;sol&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">connect_db</span><span class="p">():</span>
+    <span class="c1"># establish connection to the database</span>
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">sal</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///marswind.db&#39;</span><span class="p">)</span>
+    <span class="c1"># storing tables from database into dataframe</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM master&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+    <span class="c1"># get list of unique sols in the database</span>
+    <span class="c1"># this will serve a selection list to display wind roses</span>
+    <span class="n">unique_sols</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;sol&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -13238,11 +13207,13 @@ div#notebook {
 <span class="c1"># defining button and what it should dp</span>
 <span class="n">button</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Graph!&#39;</span><span class="p">)</span>
 <span class="n">out</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Output</span><span class="p">()</span>
+
 <span class="k">def</span> <span class="nf">on_button_clicked</span><span class="p">(</span><span class="n">_</span><span class="p">):</span>
       <span class="c1"># &quot;linking function with output&quot;</span>
     <span class="k">with</span> <span class="n">out</span><span class="p">:</span>
           <span class="c1"># what happens when we press the button</span>
-        <span class="n">clear_output</span><span class="p">()</span> 
+        <span class="n">clear_output</span><span class="p">()</span>
+        <span class="n">connect_db</span><span class="p">()</span>
         <span class="n">user_input</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">menu</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
         <span class="n">new_df</span> <span class="o">=</span> <span class="n">create_sol_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">user_input</span><span class="p">)</span>
         <span class="c1">#print(new_df)</span>
@@ -13320,6 +13291,23 @@ div#notebook {
     <span class="p">)</span>
 
     <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+  </div>
+
+  
+
+  <div class="
+      cell border-box-sizing code_cell rendered">
+    <div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">interact</span><span class="p">(</span><span class="n">on_button_clicked</span><span class="p">,</span> <span class="n">graph_polar</span><span class="p">)</span>
 </pre></div>
 
     </div>
